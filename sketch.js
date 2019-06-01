@@ -5,6 +5,9 @@ const setup = () => {
     noLoop();   // freeze canvas
     let grid = blankGrid();
     let grid_new = blankGrid();
+
+    addNumber();
+    updateCanvas();
 }
 
 // draw and update canvas
@@ -13,6 +16,8 @@ const updateCanvas = () => {
     background(255);
     drawGrid();
 }
+
+
 
 const keyPressed = () => {
     let flipped = false;
@@ -38,6 +43,35 @@ const keyPressed = () => {
             break;
         default:
             played = false;
+    }
+
+    if (played) {
+        let past = copyGrid(grid);
+        for (let i = 0; i < 4; i++) {
+            grid[i] = operate(grid[i]);
+        }
+        let changed = compare(past, grid);
+        if (flipped) {
+            grid = flipGrid(grid);
+        }
+        if (rotated) {
+            grid = transposeGrid(grid);
+        }
+        if (changed) {
+            addNumber();
+        }
+        updateCanvas();
+
+        let gameover = isGameOver();
+        if (gameover) {
+            console.log("GAME OVER");
+        }
+
+        let gamewon = isGameWon();
+        if (gamewon) {
+            console.log("GAME WON");
+        }
+
     }
 }
 
