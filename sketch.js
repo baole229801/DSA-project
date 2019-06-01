@@ -15,6 +15,8 @@ const updateCanvas = () => {
 }
 
 const drawGrid = () => {
+    let w = 100;
+
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; i++) {
             noFill(); // grid separate not fill
@@ -29,6 +31,21 @@ const drawGrid = () => {
             } else {
                 strokeWeight(4);
                 stroke(0);
+            }
+
+            if (val != 0) {
+                fill(colorSizes[s].color);
+            } else {
+                noFill();
+            }
+
+            rect(i * w, j * w, w, w, 30);
+            if (val !== 0) {
+                textAlign(CENTER, CENTER);
+                noStroke();
+                fill(0);
+                textSize(colorSizes[s].size);
+                text(val, i * w + w / 2, j * w + w / 2);
             }
         }
     }
