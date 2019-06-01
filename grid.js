@@ -40,3 +40,34 @@ const flipGrid = grid => {
     return grid;
 }
 
+// transpose grid
+const transposeGrid = grid => {
+    let newGrid = blankGrid();
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            newGrid[i][j] = grid[j][i];
+        }
+    }
+    return newGrid;
+}
+
+// add number into grid
+const addNumber = () => {
+    let options = [];
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (grid[i][j] === 0) {
+                options.push({
+                    x: i,
+                    y: j
+                });
+            }
+        }
+    }
+    if (options.length > 0) {
+        let spot = random(options);
+        let r = random(1);
+        grid[spot.x][spot.y] = r > 0.1 ? 2 : 4;
+        grid_new[spot.x][spot.y] = 1;
+    }
+}
